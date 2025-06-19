@@ -142,6 +142,9 @@
 }
 
 @media (max-width: 576px) {
+  .hero-text {
+    font-size: clamp(1.8rem, 9vw, 4.5rem);
+  }
   .scroll-section {
     min-height: 80vh;
     padding: 4rem 1rem;
@@ -152,6 +155,12 @@
 }
 
 @media (max-width: 480px) {
+  .App-header {
+    font-size: 2.5rem;
+  }
+  .hero-text {
+    font-size: clamp(1.6rem, 8vw, 3.8rem);
+  }
   .App-header {
     font-size: 3.5rem;
   }
