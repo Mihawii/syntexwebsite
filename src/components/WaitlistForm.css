@@ -1,0 +1,72 @@
+.waitlist-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  text-align: center;
+  color: #fff;
+  max-width: 700px;
+  margin: 5rem auto;
+
+  /* Liquid Glass Effect */
+  background: rgba(35, 35, 35, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 32px; /* Rounder ends */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.waitlist-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.waitlist-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #a0a0a0;
+}
+
+.waitlist-form {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px; /* Adjust width for a cleaner look */
+  gap: 1rem; /* Add space between input and button */
+}
+
+.waitlist-input {
+  width: 100%; /* Make input take full width */
+  padding: 15px 20px;
+  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px; /* Apply border-radius to all corners */
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  outline: none;
+  transition: border-color 0.3s ease;
+  text-align: center;
+}
+
+.waitlist-input:focus {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.waitlist-button {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 30px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.waitlist-button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.4);
+}

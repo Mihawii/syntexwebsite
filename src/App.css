@@ -1,38 +1,155 @@
 .App {
+  overflow-x: hidden;
+  background-color: #000;
+  color: white;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8rem; /* Increased font size */
+  font-weight: bold;
+}
+
+
+
+.about-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 2rem;
+  gap: 2rem;
+}
+
+.internships-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5rem 2rem;
+  gap: 4rem;
+}
+
+.about-heading-container {
+  width: 100%;
+  max-width: 800px;
+  height: 200px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scroll-section {
+  min-height: 100vh; /* Make section take full viewport height */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.hero-text {
+  font-size: 6rem;
+  font-weight: bold;
+  line-height: 1.2;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.about-cards-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 950px;
+  flex-wrap: nowrap; /* Force single line on desktop */
+  margin-top: 4rem; /* Added spacing from the heading */
+}
+
+.about-card {
+  width: 280px;
+  height: 360px;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #0d0d0d;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+  z-index: 10;
+}
+
+.about-card-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #e2e8f0;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  will-change: opacity, transform;
+  position: relative; /* Ensure text is on top of the canvas */
+  z-index: 1;
+}
+
+.about-card:hover .about-card-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive wrapping for tablets and below */
+@media (max-width: 992px) {
+  .App-header {
+    font-size: 6rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .about-heading-container {
+    height: 180px;
+  }
+
+  .about-cards-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .App-header {
+    font-size: 4.5rem;
+  }
+
+  .about-section {
+    padding: 4rem 1rem;
+  }
+
+  .about-heading-container {
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .App-header {
+    font-size: 3.5rem;
+  }
+
+  .about-heading-container {
+    height: 100px;
+  }
+
+  .about-cards-container {
+    gap: 1rem;
   }
 }
