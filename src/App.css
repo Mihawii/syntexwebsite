@@ -54,6 +54,7 @@
 }
 
 .hero-text {
+  font-size: clamp(2.5rem, 12vw, 6rem);
   font-size: 6rem;
   font-weight: bold;
   line-height: 1.2;
@@ -137,6 +138,16 @@
 
   .about-heading-container {
     height: 120px;
+  }
+}
+
+@media (max-width: 576px) {
+  .scroll-section {
+    min-height: 80vh;
+    padding: 4rem 1rem;
+  }
+  .hero-text {
+    line-height: 1.1;
   }
 }
 

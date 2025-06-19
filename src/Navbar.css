@@ -3,7 +3,6 @@
   top: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
-  width: auto;
   display: flex;
   align-items: center;
   gap: 2rem;
