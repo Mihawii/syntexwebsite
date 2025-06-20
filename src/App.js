@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Confetti } from './components/ui/confetti';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -22,7 +23,8 @@ const partners = [
 ];
 
 function App() {
-  const smoothScrollRef = useRef(null);
+    const smoothScrollRef = useRef(null);
+  const confettiRef = useRef(null);
   const [appState, setAppState] = useState('loading'); // loading, main
   const [minFontSize, setMinFontSize] = useState(128);
 
@@ -98,8 +100,13 @@ function App() {
     duration: 1.0,
   };
 
-  return (
+    return (
     <>
+      <Confetti
+        ref={confettiRef}
+        manualstart
+        style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 9999, pointerEvents: 'none' }}
+      />
       <AnimatePresence mode="wait">
         {appState === 'loading' && <InfinityLoader key="loader" />}
 
@@ -182,7 +189,7 @@ function App() {
                     </div>
                     <FloatingLogo logo={partners[0]} />
                   </section>
-                  <WaitlistForm />
+                  <WaitlistForm confettiRef={confettiRef} />
                 </div>
               </ClickSpark>
             </SmoothScroll>

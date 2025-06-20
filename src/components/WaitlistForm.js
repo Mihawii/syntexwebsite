@@ -1,10 +1,8 @@
 import React, { useRef, useState } from 'react';
 import './WaitlistForm.css';
-import { Confetti } from './ui/confetti';
 import ShinyText from './ShinyText';
 
-const WaitlistForm = () => {
-  const confettiRef = useRef(null);
+const WaitlistForm = ({ confettiRef }) => {
   const formRef = useRef(null);
   const [status, setStatus] = useState(null);
   const handleSubmit = async (e) => {
@@ -35,12 +33,7 @@ const WaitlistForm = () => {
   };
 
   return (
-            <div className="waitlist-container">
-      <Confetti
-        ref={confettiRef}
-        manualstart
-        style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 9999, pointerEvents: 'none' }}
-      />
+                <div className="waitlist-container">
       <h2 className="waitlist-title">Join the Waitlist</h2>
       <p className="waitlist-subtitle">Be the first to know when we launch.</p>
       <form className="waitlist-form" ref={formRef} onSubmit={handleSubmit}>
