@@ -11,7 +11,7 @@ import SyntexLogo from './components/SyntexLogo';
 import SplitText from './components/SplitText';
 import WaitlistForm from './components/WaitlistForm';
 import InfinityLoader from './components/InfinityLoader';
-import TextPressure from './components/TextPressure';
+
 import ParticleEffect from './components/ParticleEffect';
 import SpotlightCard from './components/SpotlightCard';
 import FloatingLogo from './components/FloatingLogo';
@@ -88,6 +88,38 @@ function App() {
     }
   }, [appState]);
 
+  useEffect(() => {
+    if (appState !== 'main') return;
+
+    const cards = gsap.utils.toArray('.about-card');
+    if (cards.length < 3) return;
+
+    // Use a short delay to ensure DOM elements have their final dimensions
+    const timer = setTimeout(() => {
+      const cardWidth = cards[0].offsetWidth;
+      const gap = 24; // Corresponds to 1.5rem
+      const distance = cardWidth + gap;
+
+      const tl = gsap.timeline({
+          scrollTrigger: {
+              trigger: ".about-cards-container",
+              start: "top 80%",
+              end: "center 70%",
+              scrub: 1.5,
+          },
+          defaults: { ease: 'power2.out' }
+      });
+
+      // Animate cards from a central, stacked position to their final layout positions
+      tl.from(cards[0], { x: distance, rotation: 10 })
+        .from(cards[1], { y: -10, scale: 1.05 }, "<0.1")
+        .from(cards[2], { x: -distance, rotation: -10 }, "<");
+    }, 100);
+
+    return () => clearTimeout(timer);
+
+  }, [appState]);
+
   const pageVariants = {
     initial: { opacity: 0, y: 20 },
     in: { opacity: 1, y: 0 },
@@ -135,20 +167,8 @@ function App() {
                     <SplitText text="your career begins here." className="hero-text" />
                   </div>
                   <section id="about" className="about-section">
-                    <div className="about-heading-container">
-                      <TextPressure
-                        text="About Syntex"
-                        scale={true}
-                        flex={true}
-                        alpha={false}
-                        stroke={false}
-                        width={false}
-                        weight={true}
-                        italic={false}
-                        textColor="#ffffff"
-                        minFontSize={minFontSize}
-                        interactionRadius={120}
-                      />
+                                        <div className="about-heading-container">
+                      <SplitText text="About Syntex" className="hero-text" />
                     </div>
                     <div className="about-cards-container">
                       <SpotlightCard className="about-card" spotlightColor="rgba(255, 255, 255, 0.15)">
@@ -172,20 +192,8 @@ function App() {
                     </div>
                   </section>
                   <section id="partners" className="internships-section">
-                    <div className="about-heading-container">
-                      <TextPressure
-                        text="Our Partners"
-                        scale={true}
-                        flex={true}
-                        alpha={false}
-                        stroke={false}
-                        width={false}
-                        weight={true}
-                        italic={false}
-                        textColor="#ffffff"
-                        minFontSize={minFontSize}
-                        interactionRadius={120}
-                      />
+                                        <div className="about-heading-container">
+                      <SplitText text="Our Partners" className="hero-text" />
                     </div>
                     <FloatingLogo logo={partners[0]} />
                   </section>
