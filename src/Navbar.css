@@ -45,3 +45,29 @@
 .navbar-links a:hover {
   color: #a7a7a7;
 }
+
+.navbar.wide {
+  width: 65%;
+  padding: 1rem 2rem;
+  top: 2rem;
+}
+
+.navbar.shrink {
+  width: 45%;
+  padding: 0.5rem 1.5rem;
+  top: 1rem;
+  justify-content: space-between;
+}
+
+.navbar.wide {
+  width: 65%;
+  padding: 1rem 2rem;
+  top: 2rem;
+}
+
+.navbar.shrink {
+  width: 45%;
+  padding: 0.5rem 1.5rem;
+  top: 1rem;
+  justify-content: space-between;
+}
