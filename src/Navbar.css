@@ -49,12 +49,12 @@
 
 .navbar.wide {
   width: 65%;
-  padding: 1rem 2rem;
-  top: 3.5rem;
+  padding: 0.6rem 2rem;
+  top: 2rem;
 }
 
 .navbar.shrink {
   width: 45%;
-  padding: 0.5rem 1.5rem;
-  top: 2.5rem;
+  padding: 0.3rem 1.5rem;
+  top: 1.5rem;
 }
