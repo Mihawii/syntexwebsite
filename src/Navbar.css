@@ -1,10 +1,10 @@
 .navbar {
   position: fixed;
-  top: 2.5rem;
+  top: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
+  width: auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 2rem;
   padding: 0.8rem 2rem;
@@ -14,7 +14,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50px;
   z-index: 1000;
-  transition: all 0.25s ease;
+  transition: all 0.3s ease;
 }
 
 .navbar-logo {
@@ -44,19 +44,4 @@
 
 .navbar-links a:hover {
   color: #a7a7a7;
-}
-
-/* Responsive shrink behaviour */
-.navbar.wide {
-  width: 65%;
-  padding: 0.8rem 2.5rem;
-  gap: 2.5rem;
-}
-
-.navbar.shrink {
-  width: 45%;
-  top: 2rem;
-  padding: 0.5rem 2rem;
-  gap: 1rem;
-  backdrop-filter: blur(8px);
 }

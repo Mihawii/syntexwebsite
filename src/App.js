@@ -1,8 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Confetti } from './components/ui/confetti';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './App.css';
 import Navbar from './Navbar';
 import SmoothScroll from './SmoothScroll';
@@ -11,7 +8,7 @@ import SyntexLogo from './components/SyntexLogo';
 import SplitText from './components/SplitText';
 import WaitlistForm from './components/WaitlistForm';
 import InfinityLoader from './components/InfinityLoader';
-
+import TextPressure from './components/TextPressure';
 import ParticleEffect from './components/ParticleEffect';
 import SpotlightCard from './components/SpotlightCard';
 import FloatingLogo from './components/FloatingLogo';
@@ -23,8 +20,6 @@ const partners = [
 ];
 
 function App() {
-    const smoothScrollRef = useRef(null);
-  const confettiRef = useRef(null);
   const [appState, setAppState] = useState('loading'); // loading, main
   const [minFontSize, setMinFontSize] = useState(128);
 
@@ -66,60 +61,6 @@ function App() {
     };
   }, []);
 
-  useEffect(() => {
-    if (appState === 'main' && smoothScrollRef.current?.lenis) {
-      const lenis = smoothScrollRef.current.lenis;
-      const defaultLerp = lenis.options.lerp;
-      const slowLerp = 0.05;
-
-      const slowScrollSections = gsap.utils.toArray('.scroll-section');
-
-      slowScrollSections.forEach(section => {
-        ScrollTrigger.create({
-          trigger: section,
-          start: 'top bottom',
-          end: 'bottom top',
-          onEnter: () => (lenis.options.lerp = slowLerp),
-          onLeave: () => (lenis.options.lerp = defaultLerp),
-          onEnterBack: () => (lenis.options.lerp = slowLerp),
-          onLeaveBack: () => (lenis.options.lerp = defaultLerp),
-        });
-      });
-    }
-  }, [appState]);
-
-  useEffect(() => {
-    if (appState !== 'main') return;
-
-    const cards = gsap.utils.toArray('.about-card');
-    if (cards.length < 3) return;
-
-    // Use a short delay to ensure DOM elements have their final dimensions
-    const timer = setTimeout(() => {
-      const cardWidth = cards[0].offsetWidth;
-      const gap = 24; // Corresponds to 1.5rem
-      const distance = cardWidth + gap;
-
-      const tl = gsap.timeline({
-          scrollTrigger: {
-              trigger: ".about-cards-container",
-              start: "top 80%",
-              end: "center 70%",
-              scrub: 1.5,
-          },
-          defaults: { ease: 'power2.out' }
-      });
-
-      // Animate cards from a central, stacked position to their final layout positions
-      tl.from(cards[0], { x: distance, rotation: 10 })
-        .from(cards[1], { y: -10, scale: 1.05 }, "<0.1")
-        .from(cards[2], { x: -distance, rotation: -10 }, "<");
-    }, 100);
-
-    return () => clearTimeout(timer);
-
-  }, [appState]);
-
   const pageVariants = {
     initial: { opacity: 0, y: 20 },
     in: { opacity: 1, y: 0 },
@@ -132,13 +73,8 @@ function App() {
     duration: 1.0,
   };
 
-    return (
+  return (
     <>
-      <Confetti
-        ref={confettiRef}
-        manualstart
-        style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 9999, pointerEvents: 'none' }}
-      />
       <AnimatePresence mode="wait">
         {appState === 'loading' && <InfinityLoader key="loader" />}
 
@@ -150,9 +86,9 @@ function App() {
             variants={pageVariants}
             transition={pageTransition}
           >
-            <SmoothScroll ref={smoothScrollRef}>
+            <SmoothScroll>
               <ClickSpark>
-                                <div className="App">
+                <div className="App">
                   <Navbar />
                   <header className="App-header">
                     <SyntexLogo />
@@ -167,8 +103,20 @@ function App() {
                     <SplitText text="your career begins here." className="hero-text" />
                   </div>
                   <section id="about" className="about-section">
-                                        <div className="about-heading-container">
-                      <SplitText text="About Syntex" className="hero-text" />
+                    <div className="about-heading-container">
+                      <TextPressure
+                        text="About Syntex"
+                        scale={true}
+                        flex={true}
+                        alpha={false}
+                        stroke={false}
+                        width={false}
+                        weight={true}
+                        italic={false}
+                        textColor="#ffffff"
+                        minFontSize={minFontSize}
+                        interactionRadius={120}
+                      />
                     </div>
                     <div className="about-cards-container">
                       <SpotlightCard className="about-card" spotlightColor="rgba(255, 255, 255, 0.15)">
@@ -192,12 +140,24 @@ function App() {
                     </div>
                   </section>
                   <section id="partners" className="internships-section">
-                                        <div className="about-heading-container">
-                      <SplitText text="Our Partners" className="hero-text" />
+                    <div className="about-heading-container">
+                      <TextPressure
+                        text="Our Partners"
+                        scale={true}
+                        flex={true}
+                        alpha={false}
+                        stroke={false}
+                        width={false}
+                        weight={true}
+                        italic={false}
+                        textColor="#ffffff"
+                        minFontSize={minFontSize}
+                        interactionRadius={120}
+                      />
                     </div>
                     <FloatingLogo logo={partners[0]} />
                   </section>
-                  <WaitlistForm confettiRef={confettiRef} />
+                  <WaitlistForm />
                 </div>
               </ClickSpark>
             </SmoothScroll>
