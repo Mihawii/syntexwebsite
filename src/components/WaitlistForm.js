@@ -1,8 +1,10 @@
 import React, { useRef, useState } from 'react';
 import './WaitlistForm.css';
+import { Confetti } from './ui/confetti';
 import ShinyText from './ShinyText';
 
 const WaitlistForm = () => {
+  const confettiRef = useRef(null);
   const formRef = useRef(null);
   const [status, setStatus] = useState(null);
   const handleSubmit = async (e) => {
@@ -17,7 +19,13 @@ const WaitlistForm = () => {
       });
       const data = await res.json();
       if (data?.ok || res.ok) {
-        setStatus('success');
+                setStatus('success');
+        if (confettiRef.current) {
+          const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1001 };
+          const randomInRange = (min, max) => Math.random() * (max - min) + min;
+          confettiRef.current.fire({ ...defaults, particleCount: 50, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+          confettiRef.current.fire({ ...defaults, particleCount: 50, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+        }
         formRef.current.reset();
       } else {
         setStatus('error');
@@ -29,7 +37,12 @@ const WaitlistForm = () => {
   };
 
   return (
-    <div className="waitlist-container">
+        <div className="waitlist-container" style={{ position: 'relative' }}>
+      <Confetti
+        ref={confettiRef}
+        manualstart
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1000, pointerEvents: 'none' }}
+      />
       <h2 className="waitlist-title">Join the Waitlist</h2>
       <p className="waitlist-subtitle">Be the first to know when we launch.</p>
       <form className="waitlist-form" ref={formRef} onSubmit={handleSubmit}>
