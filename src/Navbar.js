@@ -4,7 +4,17 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import AnimatedGroup from './components/AnimatedGroup';
 
+import { useState, useEffect } from 'react';
+
 const Navbar = () => {
+    const [shrink, setShrink] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setShrink(window.scrollY > 80);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const scrollToSection = (e, sectionId) => {
     e.preventDefault();
     const section = document.getElementById(sectionId);
@@ -16,7 +26,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${shrink ? 'shrink' : 'wide'}`}>
       <div className="navbar-logo">
         <Link to="/"><img src={logo} alt="Syntex Logo" className="navbar-logo-img" /></Link>
       </div>
