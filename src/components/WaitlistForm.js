@@ -21,10 +21,8 @@ const WaitlistForm = () => {
       if (data?.ok || res.ok) {
                 setStatus('success');
         if (confettiRef.current) {
-          const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1001 };
-          const randomInRange = (min, max) => Math.random() * (max - min) + min;
-          confettiRef.current.fire({ ...defaults, particleCount: 50, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
-          confettiRef.current.fire({ ...defaults, particleCount: 50, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+          console.log('Firing confetti!');
+          confettiRef.current.fire();
         }
         formRef.current.reset();
       } else {
@@ -37,11 +35,11 @@ const WaitlistForm = () => {
   };
 
   return (
-        <div className="waitlist-container" style={{ position: 'relative' }}>
+            <div className="waitlist-container">
       <Confetti
         ref={confettiRef}
         manualstart
-        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1000, pointerEvents: 'none' }}
+        style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 9999, pointerEvents: 'none' }}
       />
       <h2 className="waitlist-title">Join the Waitlist</h2>
       <p className="waitlist-subtitle">Be the first to know when we launch.</p>

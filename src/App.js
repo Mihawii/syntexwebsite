@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './App.css';
 import Navbar from './Navbar';
 import SmoothScroll from './SmoothScroll';
@@ -20,6 +22,7 @@ const partners = [
 ];
 
 function App() {
+  const smoothScrollRef = useRef(null);
   const [appState, setAppState] = useState('loading'); // loading, main
   const [minFontSize, setMinFontSize] = useState(128);
 
@@ -61,6 +64,28 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (appState === 'main' && smoothScrollRef.current?.lenis) {
+      const lenis = smoothScrollRef.current.lenis;
+      const defaultLerp = lenis.options.lerp;
+      const slowLerp = 0.05;
+
+      const slowScrollSections = gsap.utils.toArray('.scroll-section');
+
+      slowScrollSections.forEach(section => {
+        ScrollTrigger.create({
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          onEnter: () => (lenis.options.lerp = slowLerp),
+          onLeave: () => (lenis.options.lerp = defaultLerp),
+          onEnterBack: () => (lenis.options.lerp = slowLerp),
+          onLeaveBack: () => (lenis.options.lerp = defaultLerp),
+        });
+      });
+    }
+  }, [appState]);
+
   const pageVariants = {
     initial: { opacity: 0, y: 20 },
     in: { opacity: 1, y: 0 },
@@ -86,7 +111,7 @@ function App() {
             variants={pageVariants}
             transition={pageTransition}
           >
-            <SmoothScroll>
+            <SmoothScroll ref={smoothScrollRef}>
               <ClickSpark>
                                 <div className="App">
                   <Navbar />
