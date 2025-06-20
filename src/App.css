@@ -1,6 +1,6 @@
 .App {
+  background-color: transparent; /* was #000 so LavaLamp visible */
   overflow-x: hidden;
-  background-color: #000;
   color: white;
   text-align: center;
 }
