@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 import Navbar from './Navbar';
 import SmoothScroll from './SmoothScroll';
+import LavaLamp from './components/LavaLamp';
 import ClickSpark from './ClickSpark';
 import SyntexLogo from './components/SyntexLogo';
 import SplitText from './components/SplitText';
@@ -88,6 +89,7 @@ function App() {
           >
             <SmoothScroll>
               <ClickSpark>
+                <LavaLamp />
                 <div className="App">
                   <Navbar />
                   <header className="App-header">
